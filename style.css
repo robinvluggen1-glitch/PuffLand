@@ -38,3 +38,30 @@ button {
 button:hover {
   background: #cc0000;
 }
+<main>
+
+<h2>🔥 Nos catégories</h2>
+
+<div class="produits">
+
+<div class="carte">
+<h3>JNR Alien 10K</h3>
+<p>Disponible</p>
+<button>Voir les goûts</button>
+</div>
+
+<div class="carte">
+<h3>Falcon Pro 28K</h3>
+<p>Disponible</p>
+<button>Voir les goûts</button>
+</div>
+
+<div class="carte">
+<h3>Tank Pro 33K</h3>
+<p>Disponible</p>
+<button>Voir les goûts</button>
+</div>
+
+</div>
+
+</main>
