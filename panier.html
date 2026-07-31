@@ -11,21 +11,70 @@
 
 <header>
 <h1>🛒 Mon panier</h1>
+<p>Vérifiez votre commande</p>
 </header>
 
 <main>
+
 <h2>Votre commande</h2>
 
 <div id="liste-panier">
-    <p>Le panier sera affiché ici.</p>
+<p>Chargement du panier...</p>
 </div>
+
+<br>
+
 <a href="index.html">
 <button>⬅ Retour à la boutique</button>
 </a>
 
+<br><br>
+
+<button onclick="commanderWhatsApp()">
+📲 Commander sur WhatsApp
+</button>
+
 </main>
 
 <script src="script.js"></script>
+
+<script>
+function commanderWhatsApp(){
+
+let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+if(panier.length===0){
+
+alert("Votre panier est vide.");
+
+return;
+
+}
+
+let message="Bonjour, je souhaite commander :%0A%0A";
+
+let total=0;
+
+panier.forEach(article=>{
+
+let sousTotal=article.prix*article.quantite;
+
+total+=sousTotal;
+
+message+=
+"- "+article.modele+
+"%0AGoût : "+article.gout+
+"%0AQuantité : "+article.quantite+
+"%0APrix : "+sousTotal+" €%0A%0A";
+
+});
+
+message+="TOTAL : "+total+" €";
+
+window.open("https://wa.me/32473820372?text="+message);
+
+}
+</script>
 
 </body>
 </html>
