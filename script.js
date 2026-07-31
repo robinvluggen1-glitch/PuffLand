@@ -1,56 +1,110 @@
-let compteur = localStorage.getItem("panier") || 0;
+// Mise à jour du compteur du panier
+function mettreAJourCompteur() {
+    const panier = JSON.parse(localStorage.getItem("panier")) || [];
+    const compteur = panier.reduce((total, article) => total + article.quantite, 0);
 
-document.getElementById("compteur").textContent = compteur;
+    const element = document.getElementById("compteur");
+    if (element) {
+        element.textContent = compteur;
+    }
+}
 
-const boutons = document.querySelectorAll("button");
+mettreAJourCompteur();
 
-boutons.forEach((bouton) => {
-    if (bouton.textContent.includes("Ajouter au panier")) {
-        bouton.addEventListener("click", () => {
-            compteur++;
-            localStorage.setItem("panier", compteur);
-            document.getElementById("compteur").textContent = compteur;
+// Ajouter un produit au panier
+function ajouterPanier(modele, gout, prix) {
+
+    let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+    const article = panier.find(
+        p => p.modele === modele && p.gout === gout
+    );
+
+    if (article) {
+        article.quantite++;
+    } else {
+        panier.push({
+            modele: modele,
+            gout: gout,
+            prix: prix,
+            quantite: 1
         });
     }
-});
 
+    localStorage.setItem("panier", JSON.stringify(panier));
+
+    mettreAJourCompteur();
+
+    alert(gout + " ajouté au panier !");
+}
+
+// Affichage du panier
 const liste = document.getElementById("liste-panier");
 
 if (liste) {
 
-let panier = JSON.parse(localStorage.getItem("panier")) || [];
+    const panier = JSON.parse(localStorage.getItem("panier")) || [];
 
-if (panier.length === 0) {
+    if (panier.length === 0) {
 
-liste.innerHTML = "<p>Votre panier est vide.</p>";
+        liste.innerHTML = "<p>Votre panier est vide.</p>";
 
-} else {
+    } else {
 
-let html = "";
-let total = 0;
+        let html = "";
+        let total = 0;
 
-panier.forEach((article) => {
+        panier.forEach((article, index) => {
 
-html += `
-<div class="carte">
-<h3>${article.modele}</h3>
-<p><strong>Goût :</strong> ${article.gout}</p>
-<p><strong>Prix :</strong> ${article.prix} €</p>
-</div>
-`;
+            const sousTotal = article.prix * article.quantite;
+            total += sousTotal;
 
-total += article.prix;
+            html += `
+            <div class="carte">
+                <h3>${article.modele}</h3>
+                <p><strong>Goût :</strong> ${article.gout}</p>
+                <p><strong>Quantité :</strong> ${article.quantite}</p>
+                <p><strong>Prix :</strong> ${article.prix} €</p>
+                <p><strong>Sous-total :</strong> ${sousTotal} €</p>
 
-});
+                <button onclick="supprimerArticle(${index})">
+                    🗑️ Supprimer
+                </button>
+            </div>
+            `;
 
-html += `
-<div class="carte">
-<h2>Total : ${total} €</h2>
-</div>
-`;
+        });
 
-liste.innerHTML = html;
+        html += `
+        <div class="carte">
+            <h2>Total : ${total} €</h2>
 
+            <button onclick="viderPanier()">
+                Vider le panier
+            </button>
+        </div>
+        `;
+
+        liste.innerHTML = html;
+    }
 }
 
+// Supprimer un article
+function supprimerArticle(index){
+
+    let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+    panier.splice(index,1);
+
+    localStorage.setItem("panier", JSON.stringify(panier));
+
+    location.reload();
+}
+
+// Vider le panier
+function viderPanier(){
+
+    localStorage.removeItem("panier");
+
+    location.reload();
 }
