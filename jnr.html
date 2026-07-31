@@ -21,67 +21,89 @@
 <div class="carte">
 <h3>Black Dragon Ice</h3>
 <p>Stock : 3</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Black Dragon Ice',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Lush Ice</h3>
 <p>Stock : 9</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Lush Ice',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>JNR Tropicana Zest</h3>
 <p>Stock : 1</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Kiwi Strawberry</h3>
 <p>Stock : 7</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Lemon Lime</h3>
 <p>Stock : 1</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Blue Razz Ice</h3>
 <p>Stock : 6</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Grape Ice</h3>
 <p>Stock : 4</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Cherry Peach Lemonade</h3>
 <p>Stock : 1</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Peach Berry</h3>
 <p>Stock : 4</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Sparkling Cherry</h3>
 <p>Stock : 3</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <div class="carte">
 <h3>Watermelon BBG</h3>
 <p>Stock : 2</p>
-<button>Ajouter au panier</button>
+<button onclick="ajouterPanier('JNR Alien 10K','Tropicana Zest',10)">
+Ajouter au panier
+</button>
 </div>
 
 <a href="index.html">
@@ -89,6 +111,22 @@
 </a>
 
 </main>
+  
+<script>
+function ajouterPanier(modele, gout, prix) {
 
+let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+panier.push({
+modele: modele,
+gout: gout,
+prix: prix
+});
+
+localStorage.setItem("panier", JSON.stringify(panier));
+
+alert(gout + " ajouté au panier !");
+}
+</script>
 </body>
 </html>
