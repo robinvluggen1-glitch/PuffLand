@@ -17,10 +17,40 @@ boutons.forEach((bouton) => {
 const liste = document.getElementById("liste-panier");
 
 if (liste) {
-liste.innerHTML = `
+
+let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+if (panier.length === 0) {
+
+liste.innerHTML = "<p>Votre panier est vide.</p>";
+
+} else {
+
+let html = "";
+let total = 0;
+
+panier.forEach((article) => {
+
+html += `
 <div class="carte">
-    <h3>Articles dans le panier</h3>
-    <p>Nombre d'articles : ${compteur}</p>
+<h3>${article.modele}</h3>
+<p><strong>Goût :</strong> ${article.gout}</p>
+<p><strong>Prix :</strong> ${article.prix} €</p>
 </div>
 `;
+
+total += article.prix;
+
+});
+
+html += `
+<div class="carte">
+<h2>Total : ${total} €</h2>
+</div>
+`;
+
+liste.innerHTML = html;
+
+}
+
 }
