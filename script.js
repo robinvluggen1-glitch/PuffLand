@@ -13,6 +13,7 @@ boutons.forEach((bouton) => {
         });
     }
 });
+
 const liste = document.getElementById("liste-panier");
 
 if (liste) {
