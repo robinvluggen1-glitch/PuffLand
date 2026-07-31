@@ -17,10 +17,10 @@ boutons.forEach((bouton) => {
 const liste = document.getElementById("liste-panier");
 
 if (liste) {
-    liste.innerHTML = `
-        <div class="carte">
-            <h3>Articles dans le panier</h3>
-            <p>Nombre d'articles : ${compteur}</p>
-        </div>
-    `;
+liste.innerHTML = `
+<div class="carte">
+    <h3>Articles dans le panier</h3>
+    <p>Nombre d'articles : ${compteur}</p>
+</div>
+`;
 }
